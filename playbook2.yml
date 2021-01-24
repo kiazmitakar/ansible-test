@@ -1,0 +1,52 @@
+---
+- name: install nginx
+  hosts: nginx-webservers
+  become: yes
+  become_user: root
+  remote_user: attila
+
+  tasks:
+  - name: install nginx
+    apt:
+      name: nginx
+      state: latest
+
+  - name: install mc
+    apt:
+      name: mc
+      state: latest
+
+  - name: copy index
+    copy:
+      src:  /home/ubuntu-ansible/ansible-test/nginx-machines/index.html
+      dest: /var/www/html/index.html
+      owner: root
+      group: root
+      mode: '0644'
+
+  - name: install ca-certi
+    apt:
+      name: ca-certificates
+      state: latest
+
+  - name: create dir
+    file:
+      path: /tmp/ansible
+      state: directory
+
+
+  - name: run mongodb certi
+    get_url:
+      url: https://www.mongodb.org/static/pgp/server-4.4.asc
+      dest: /tmp/ansible/server-4.4.asc
+
+  - name: add certi
+    command: apt-key add /tmp/ansible/server-4.4.asc
+
+  - name: add list
+    command: echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+
+  - name: install apt
+    apt:
+      name: mongodb
+      update_cache: yes

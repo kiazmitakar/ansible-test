@@ -1,0 +1,25 @@
+---
+- name: install nginx
+  hosts: nginx-webservers
+  become: yes
+  become_user: root
+  remote_user: attila
+
+  tasks:
+  - name: install nginx
+    apt:
+      name: nginx
+      state: latest
+
+  - name: install mc
+    apt:
+      name: mc
+      state: latest
+
+  - name: copy index
+    copy:
+      src:  /home/ubuntu-ansible/ansible-test/nginx-machines/index.html
+      dest: /var/www/html/index.html
+      owner: root
+      group: root
+      mode: '0644'
