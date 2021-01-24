@@ -1,5 +1,5 @@
 ---
-- name: centos install docker
+- name: centos install docker-compose
   hosts: jenkins-centos-machines
   become: yes
   become_user: root

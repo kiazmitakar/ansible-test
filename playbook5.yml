@@ -1,0 +1,33 @@
+---
+- name: centos jenkins
+  hosts: jenkins-centos-machines
+  become: yes
+  become_user: root
+  remote_user: attila
+
+  tasks:
+  - name: create jenkins directory
+    file:
+      state: directory
+      path: /home/attila/jenkins
+      owner: attila
+      group: attila
+      mode: 0775
+
+  - name: create jenkins-data directory
+    file:
+      state: directory
+      path: /home/attila/jenkins/jenkins-data/jenkins-home
+      owner: attila
+      group: attila
+      mode: 0775
+      recursive: yes
+ 
+ - name: copy docker-compose.yml
+     copy:
+       src: /home/ubuntu-ansible/ansible-test/nginx-machines/docker-compose.yml
+       dest: /home/attila/jenkins/jenkins-data
+       owner: attila
+       group: attila
+       mode: 0755
+  
