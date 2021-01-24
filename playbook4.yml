@@ -1,0 +1,20 @@
+---
+- name: centos install docker
+  hosts: jenkins-centos-machines
+  become: yes
+  become_user: root
+  remote_user: attila
+
+  tasks:
+  - name: file delete
+    file:
+      state: absent
+      path: /usr/local/bin/docker-compose
+
+  - name: download docker-compose
+    get_url:
+      url: https://github.com/docker/compose/releases/download/1.23.1/docker-compose-Linux-x86_64
+      dest: /usr/local/bin/docker-compose
+      mode: 0755
+      owner: attila
+      group: attila
