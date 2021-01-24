@@ -17,17 +17,23 @@
   - name: create jenkins-data directory
     file:
       state: directory
-      path: /home/attila/jenkins/jenkins-data/jenkins-home
+      path: /home/attila/jenkins/jenkins-data/jenkins_home
       owner: attila
       group: attila
       mode: 0775
-      recursive: yes
- 
- - name: copy docker-compose.yml
-     copy:
-       src: /home/ubuntu-ansible/ansible-test/nginx-machines/docker-compose.yml
-       dest: /home/attila/jenkins/jenkins-data
-       owner: attila
-       group: attila
-       mode: 0755
-  
+      recurse: yes
+
+  - name: copi docker-compose yml
+    copy:
+      src: /home/ubuntu-ansible/ansible-test/nginx-machines/docker-compose.yml
+      dest: /home/attila/jenkins/jenkins-data/docker-compose.yml
+      owner: attila
+      group: attila
+      mode: 0755
+#  - name: reset ssh connection#    meta: reset_connection
+
+  - name: run jenkins service in docker
+    command: cd /home/attila/jenkins/jenkins-data
+
+  - name: run
+    command: ['docker-compose', 'up', '-d']

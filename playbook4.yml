@@ -9,6 +9,7 @@
   - name: file delete
     file:
       state: absent
+      force: no
       path: /usr/local/bin/docker-compose
 
   - name: download docker-compose
@@ -18,3 +19,4 @@
       mode: 0755
       owner: attila
       group: attila
+      force: no

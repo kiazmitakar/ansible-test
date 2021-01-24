@@ -12,6 +12,7 @@
       name: docker-ce
       baseurl: https://download.docker.com/linux/centos/7/x86_64/stable/
       gpgcheck: no
+      force: no
 
   - name: installing docker
     package:
@@ -28,7 +29,11 @@
       name: docker  
       state: present
 
+  #must logout and login to refresh user groups
   - name: add user to admin group
     user:
       name: attila
       group: docker
+
+#  - name: reset ssh connestion
+#   meta: reset_connection
