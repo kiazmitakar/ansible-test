@@ -35,5 +35,5 @@
       name: attila
       group: docker
 
-#  - name: reset ssh connestion
-#   meta: reset_connection
+  - name: reset ssh connestion
+    meta: reset_connection
