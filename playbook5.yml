@@ -34,7 +34,7 @@
   - name: copy centos7 folder
     copy:
       src: /home/attila/ansible/ansible-test/jenkins/centos7
-      dest: /home/attila/jenkins/jenkins-data/centos7
+      dest: /home/attila/jenkins/jenkins-data
       owner: attila
       group: attila
       mode: 0755
@@ -43,6 +43,6 @@
   - name: reset ssh connection
     meta: reset_connection
 
-  - name: run jenkins service in docker
-    community.general.docker_compose:
-      project_src: /home/attila/jenkins/jenkins-data
+#  - name: run jenkins service in docker
+#    community.general.docker_compose:
+#      project_src: /home/attila/jenkins/jenkins-data
