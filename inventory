@@ -3,7 +3,7 @@
 172.30.154.85 ansible_sudo_pass=attila
 
 [jenkins-centos-machines]
-172.30.154.91 ansible_sudo_pass=attila
+#172.30.154.91 ansible_sudo_pass=attila
 172.30.154.82 ansible_sudo_pass=attila
 
 [example1]

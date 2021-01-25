@@ -25,11 +25,20 @@
 
   - name: copi docker-compose yml
     copy:
-      src: /home/attila/ansible/ansible-test/docker-compose.yml
+      src: /home/attila/ansible/ansible-test/jenkins/docker-compose.yml
       dest: /home/attila/jenkins/jenkins-data/docker-compose.yml
       owner: attila
       group: attila
       mode: 0755
+
+  - name: copy centos7 folder
+    copy:
+      src: /home/attila/ansible/ansible-test/jenkins/centos7
+      dest: /home/attila/jenkins/jenkins-data/centos7
+      owner: attila
+      group: attila
+      mode: 0755
+
 
   - name: reset ssh connection
     meta: reset_connection
