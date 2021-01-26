@@ -15,4 +15,11 @@ RUN chown remote_user:remote_user -R /home/remote_user/.ssh/ && \
 
 RUN /usr/sbin/sshd-keygen
 
+RUN yum -y install mysql
+
+RUN yum -y install python3
+RUN curl -O https://bootstrap.pypa.io/get-pip.py
+RUN python3 get-pip.py
+RUN pip3 install awscli --upgrade
+
 CMD /usr/sbin/sshd -D
